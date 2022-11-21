@@ -1,0 +1,123 @@
+@import "../../../Assets/Scss//veriables.scss";
+
+.ContainerClass {
+  margin-top: 2%;
+  width: 50%;
+  margin-left: 1%;
+}
+
+.SubContainerClass {
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+.RowClass {
+  background: lightblue;
+}
+
+.ImageColumnClass {
+  // width: 26% !important;
+  height: 14rem;
+}
+
+// .ImageColumnClassOne {
+//   // width: 198% !important;
+// }
+
+.formClass {
+  width: 40% !important;
+}
+
+.SingleImageClass {
+  width: 62% !important;
+  margin-left: 5%;
+}
+
+.VerifiedButtonClass {
+  width: 40% !important;
+  margin-left: 64% !important;
+}
+img {
+  height: 90%;
+  width: 107%;
+  object-fit: cover;
+}
+.IcpToken {
+  width: 40%;
+  margin-top: 4%;
+  border: 1px solid gray;
+  color: black;
+}
+
+.VerifiedOne {
+  margin-left: -163% !important;
+}
+
+.Verifiedtwo {
+  width: 284% !important;
+}
+
+.formOne {
+  width: 78% !important;
+}
+.headingOne {
+  margin-top: 3%;
+}
+.buttonone {
+  width: 35% !important;
+}
+.formcontrol {
+  width: 35% !important;
+}
+
+.contICP {
+  border: 1px solid white;
+  border-radius: 35px;
+  margin-top: 2%;
+  background: #dad1f8;
+}
+.buttonone {
+  width: 40% !important;
+}
+// .formClassOne {
+//   // margin-left: 18% !important;
+//   // width: 50% !important;
+// }
+.contICPTwo {
+  padding-left: 2%;
+  padding-top: 2%;
+  margin-bottom: 3%;
+}
+.buttonVerify {
+  background: #854ce6;
+  width: 100% !important ;
+}
+.pathimage {
+  width: 50% !important;
+  height: 50% !important;
+}
+.navigation {
+  margin-left: -31% !important;
+  margin-top: 2%;
+}
+.ColClass {
+  margin-left: 8% !important;
+}
+.modalbody {
+  color: black;
+}
+.divcont {
+  height: 100% !important;
+}
+.imageChecked {
+  position: relative;
+  opacity: 0.3;
+}
+.imageCheckedIcon {
+  position: relative;
+  bottom: 100px;
+  left: 90px;
+}
+.imageSelected {
+  display: none;
+}

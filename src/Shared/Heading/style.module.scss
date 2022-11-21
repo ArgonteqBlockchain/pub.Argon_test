@@ -1,0 +1,43 @@
+@import "../../Assets/Scss/veriables.scss";
+
+.mainHeading {
+  font-size: $font-28;
+  line-height: 42px;
+  font-weight: $font-weight-600;
+  color: $black;
+  display: flex;
+  justify-content: center;
+  margin-left: -10%;
+}
+.pageHeading {
+  font-size: $font-22;
+  font-weight: $font-weight-600;
+  color: $black;
+  line-height: 28px;
+  display: flex;
+  justify-content: center;
+  margin-left: 4%;
+}
+.subHeadingSize {
+  font-size: $font-18;
+  color: $white;
+  text-transform: $text-uppercase;
+  span {
+    border-bottom: $bold-border;
+    padding-bottom: 2px;
+  }
+}
+.mainHeadingOne {
+  color: $black;
+  font-size: $font-32 !important;
+  font-weight: bold;
+}
+.mainHeadingTwo {
+  color: $black;
+  font-size: $font-22;
+  font-weight: bold;
+}
+.gotchaheading {
+  margin-left: 5%;
+  margin-top: 3%;
+}

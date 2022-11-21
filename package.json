@@ -1,0 +1,62 @@
+{
+  "name": "acadify_saas_frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.13",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.19.0",
+    "bootstrap": "^5.2.2",
+    "classnames": "^2.3.1",
+    "connected-react-router": "^6.9.2",
+    "cors": "^2.8.5",
+    "formik": "^2.2.9",
+    "history": "^4.10.1",
+    "immer": "^9.0.12",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-icons": "^4.6.0",
+    "react-pro-sidebar": "^0.7.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "5.0.0",
+    "react-select": "^5.2.2",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3",
+    "sass": "^1.49.0",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
