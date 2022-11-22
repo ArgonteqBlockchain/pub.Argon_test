@@ -7,7 +7,7 @@ const routes = [
   {
     path: "/",
     component: lazy(() =>
-      fakeDelay(delayTime)(import("../Pages/Auth/LoginInput/ReCaptcha"))
+      fakeDelay(delayTime)(import("../Pages/Auth/Recaptcha/ReCaptcha"))
     ),
     exact: true,
     ispublic: true,
@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/login-input",
     component: lazy(() =>
-      fakeDelay(delayTime)(import("../Pages/Auth/LoginInput/ReCaptcha"))
+      fakeDelay(delayTime)(import("../Pages/Auth/Recaptcha/ReCaptcha"))
     ),
     ispublic: true,
     exact: true,
