@@ -19,8 +19,8 @@ export default function ReCaptcha() {
   const [sessionId, setSessionId] = useState("");
 
   let showUrl =
-    "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/show";
-  let verifyUrl = "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/verify";
+    "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/show";
+  let verifyUrl = "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/verify";
 
   useEffect(() => {
     axios
