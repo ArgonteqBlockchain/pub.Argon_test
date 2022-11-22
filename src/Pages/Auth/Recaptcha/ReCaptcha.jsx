@@ -20,8 +20,9 @@ export default function ReCaptcha() {
 
   let showUrl =
     "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/show";
-  let verifyUrl =
-    "https://neat-mirrors-mate-182-176-86-191.loca.lt/api/v1/captcha/verify";
+  let 
+  Url =
+    "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
   useEffect(() => {
     axios
