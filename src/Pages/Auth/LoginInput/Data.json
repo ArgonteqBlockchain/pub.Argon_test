@@ -1,0 +1,80 @@
+{
+    "data": {
+      "DATA": [
+        {
+          "name": "cat1",
+          "path": "http://192.168.3.170:3000/cat1.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "12",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat2",
+          "path": "http://192.168.3.170:3000/cat2.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "13",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat5",
+          "path": "http://192.168.3.170:3000/cat5.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "16",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat4",
+          "path": "http://192.168.3.170:3000/cat4.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "15",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "dummy4",
+          "path": "http://192.168.3.170:3000/dummy4.jpg",
+          "category": "0",
+          "answer": "0",
+          "id": "23",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "dummy3",
+          "path": "http://192.168.3.170:3000/dummy2.jpg",
+          "category": "0",
+          "answer": "0",
+          "id": "25",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat1",
+          "path": "http://192.168.3.170:3000/cat1.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "12",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat2",
+          "path": "http://192.168.3.170:3000/cat2.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "13",
+          "categoryName": "Cat"
+        },
+        {
+          "name": "cat5",
+          "path": "http://192.168.3.170:3000/cat5.jpg",
+          "category": "4",
+          "answer": "1",
+          "id": "16",
+          "categoryName": "Cat"
+        }
+      ],
+      "categoryName": "Cat",
+      "category": "4"
+    }
+  }

@@ -1,0 +1,10 @@
+@import "./veriables.scss";
+@import "~react-pro-sidebar/dist/scss/styles.scss";
+
+body {
+  font-family: $font-family !important;
+  font-size: $font-16;
+  color: $light-gray;
+  // background-image: linear-gradient(#ddcff6, #f4effc);
+  background: #ddcff6 !important;
+}
