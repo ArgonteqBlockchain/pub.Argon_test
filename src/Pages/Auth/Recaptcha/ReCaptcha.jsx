@@ -20,9 +20,7 @@ export default function ReCaptcha() {
 
   let showUrl =
     "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/show";
-  let 
-  Url =
-    "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/verify";
+  let verifyUrl = "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
   useEffect(() => {
     axios
