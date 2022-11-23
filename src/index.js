@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import "./Assets/Scss/globalStyleSheet.scss";
+import { Toaster } from 'react-hot-toast';
 // import "react-pro-sidebar/dist/css/styles.css";
 // import reportWebVitals from "./reportWebVitals";
 // import Notification from './helpers/Notifications';
@@ -18,6 +19,7 @@ const app = (
       <PersistGate persistor={persistor}>
         {/* <Notification /> */}
         <App />
+        <Toaster />
       </PersistGate>
     </ConnectedRouter>
   </Provider>

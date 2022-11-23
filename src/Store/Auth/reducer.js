@@ -1,5 +1,4 @@
 import produce from "immer";
-import { string } from "prop-types";
 import {
   REGISTER_USER_SUCCESSFUL,
   LOGIN_SUCCESS,

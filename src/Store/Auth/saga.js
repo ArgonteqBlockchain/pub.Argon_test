@@ -11,7 +11,6 @@ import {
 import {
   loginSuccess,
   registerUserSuccessful,
-  getImagesSuccess,
   getImagesRequest,
 } from "./actions";
 import { push } from "connected-react-router";
@@ -57,7 +56,7 @@ function* forgotPasswordRequest({ payload }) {
     yield sagaErrorHandler(error.response);
   }
 }
-function* getImagesRequestFunction({}) {
+function* getImagesRequestFunction() {
   console.log(
     "-----------------------------------------------------------------------------",getImagesRequest()
   );

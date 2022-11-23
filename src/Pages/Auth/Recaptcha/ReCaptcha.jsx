@@ -1,81 +1,68 @@
-import React, { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
+import React, { useState } from "react";
+import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import styles from "./style.module.scss";
-import Heading from "../../../Shared/Heading/Heading";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import axios from "axios";
+import styles from "./style.module.scss";
 import { BsCheckLg } from "react-icons/bs";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Heading from "../../../Shared/Heading/Heading";
+import { shuffleArray } from "../../helper/helpers";
+import toast from "react-hot-toast";
 
 export default function ReCaptcha() {
-  const [data, setData] = useState([]);
-  const [imagesData, setImagesData] = useState([]);
-  const [singleData, setSingleData] = useState();
-  const [categoryData, setCategoryData] = useState({
-    name: "",
-    category: null,
-  });
   const [text, setText] = useState("");
+  const [data, setData] = useState([]);
   const [message, setMessage] = useState("");
+  const [singleData, setSingleData] = useState();
+  const [imagesData, setImagesData] = useState([]);
   const [submitted, setSubmitted] = useState(false);
-  const [sessionId, setSessionId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [verifyError, setVerifyError] = useState("");
+  const [loading, setLoading] = useState({ fetch: false, verify: false });
+  const [captchaInfo, setCaptchaInfo] = useState({
+    sessionId: "",
+    category: null,
+    categoryName: "",
+  });
 
   let showUrl =
-    "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/show";
+    "https://crazy-baths-roll-182-185-205-247.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/verify";
+    "https://crazy-baths-roll-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
-  useEffect(() => {
-    setMessage("");
+  const getCaptcha = () => {
+    setLoading({ ...loading, fetch: true });
+    resetStates();
     axios
       .get(showUrl)
-      .then((response) => {
-        setImagesData(response.data.data.DATA);
-        setSessionId(response.data.data.sessionId);
+      .then((res) => {
+        console.log({ res });
+        setImagesData(res?.data?.data?.DATA);
+        setCaptchaInfo({
+          category: res?.data?.data?.category,
+          sessionId: res?.data?.data?.sessionId,
+          categoryName: res?.data?.data?.categoryName,
+        });
 
-        if (response?.data?.data?.DATA?.length !== undefined) {
-          let resData = response.data.data.DATA.map((item) => {
+        if (res?.data?.data?.DATA?.length !== undefined) {
+          let resData = res.data.data.DATA.map((item) => {
             return { ...item, ischecked: 0 };
           });
           let shuffledArray = shuffleArray(resData);
           setData(shuffledArray);
-          setCategoryData({
-            name: response.data.data.categoryName,
-            category: response.data.data.category,
-          });
         } else {
-          setSingleData({ ...response.data.data.DATA });
-          setCategoryData({
-            name: response.data.data.categoryName,
-            category: response.data.data.category,
-          });
+          setSingleData({ ...res?.data?.data?.DATA });
         }
+        setLoading({ fetch: false, verify: false });
       })
-      .catch(function (error) {
+      .catch((error) => {
+        setLoading({ fetch: false, verify: false });
         console.log(error);
+        setSubmitted(false);
+        setErrorMessage(error?.message);
       });
-  }, [showUrl]);
-
-  const shuffleArray = (array) => {
-    let randomIndex;
-    let currentIndex = array.length;
-
-    // While there remain elements to shuffle.
-    while (currentIndex !== 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
-
-    return array;
   };
 
   const verifyCaptcha = () => {
@@ -104,46 +91,23 @@ export default function ReCaptcha() {
     axios
       .post(verifyUrl, {
         answer: apiData?.length > 0 ? apiData : obj2,
-        category: categoryData.category,
-        sessionId,
+        category: captchaInfo.category,
+        sessionId: captchaInfo.sessionId,
       })
-      .then((response) => {
+      .then((res) => {
         setText("");
-        setCategoryData({ name: "", category: null });
-        if (response.data.data.data === "unverified") {
-          refreshCaptcha();
+        setMessage(res.data.data.data);
+        if (res.data.data.data === "unverified") {
+          getCaptcha();
+          toast.error("UnVerified");
         }
-        setMessage(response.data.data.data);
       })
       .catch((error) => {
-        setText("");
-        setCategoryData({ name: "", category: null });
-
         console.log(error);
-
-        setMessage(error.data.data);
-      });
-  };
-  const refreshCaptcha = () => {
-    setMessage("");
-    axios
-      .get(showUrl)
-      .then((response) => {
-        setImagesData(response.data.data.DATA);
-        setSessionId(response.data.data.sessionId);
-
-        if (response?.data?.data?.DATA?.length !== undefined) {
-          let resData = response.data.data.DATA.map((item) => {
-            return { ...item, ischecked: 0 };
-          });
-          let shuffledArray = shuffleArray(resData);
-          setData(shuffledArray);
-        } else {
-          setSingleData({ ...response.data.data.DATA });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
+        toast.error("Network Error");
+        setLoading({ fetch: false, verify: false });
+        setSubmitted(false);
+        setVerifyError(error.message);
       });
   };
 
@@ -160,6 +124,17 @@ export default function ReCaptcha() {
     setImagesData([...items]);
   };
 
+  const resetStates = () => {
+    setData([]);
+    setText("");
+    setMessage("");
+    setImagesData([]);
+    setSingleData([]);
+    setVerifyError("");
+    setErrorMessage("");
+    setCaptchaInfo({ categoryName: "", sessionId: "", category: null });
+  };
+
   return (
     <div>
       <Container className="w-100">
@@ -173,7 +148,7 @@ export default function ReCaptcha() {
         {message?.data?.data ? message?.data?.data : ""}
       </Heading>
 
-      <Container className={`col-lg-8 ${styles.width30}`}>
+      <Container className={`col-lg-6 ${styles.width30}`}>
         <Container className={styles.contICP}>
           <Container className={styles.contICPTwo}>
             <Row>
@@ -190,10 +165,8 @@ export default function ReCaptcha() {
               <Col>
                 <Form className="w-100 rounded-top">
                   <Form.Group className="mb-3">
-                    <Form.Label></Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder=""
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                     />
@@ -203,21 +176,43 @@ export default function ReCaptcha() {
             </Row>
             <Row>
               <Col>
+                {errorMessage ? (
+                  <Row>
+                    <Col>
+                      <div className={styles.error}>
+                        Error Fetching Captcha. Please Try Again
+                      </div>
+                    </Col>
+                  </Row>
+                ) : null}
+                {verifyError ? (
+                  <Row>
+                    <Col>
+                      <div className={styles.error}>
+                        Error Verifying Captcha. Please Try Again
+                      </div>
+                    </Col>
+                  </Row>
+                ) : null}
                 {submitted ? (
                   <Container className="w-100 mt-2">
                     <Container className={styles.SubContainerClass}>
                       <Row className={styles.RowClass}>
-                        <Col className={styles.ColClass}>
+                        <Col>
                           {message !== "verified" ? (
                             <Heading mainHeading>
-                              Select All {categoryData.name}
+                              Select All {captchaInfo.categoryName}
                             </Heading>
                           ) : null}
                         </Col>
                       </Row>
                     </Container>
                     <Container>
-                      {message === "verified" ? (
+                      {loading.fetch ? (
+                        <div className={styles.loading}>
+                          Fetching Captcha...
+                        </div>
+                      ) : message === "verified" ? (
                         <Heading mainHeading>Complete</Heading>
                       ) : data?.length > 0 ? (
                         <>
@@ -228,6 +223,9 @@ export default function ReCaptcha() {
                             {data.map((item, index) => {
                               return (
                                 <Col
+                                  sm="4"
+                                  md="4"
+                                  lg="4"
                                   xl="4"
                                   key={index}
                                   className={styles.ImageColumnClass}
@@ -249,21 +247,19 @@ export default function ReCaptcha() {
                                       item.ischecked === 0
                                         ? styles.imageSelected
                                         : null
-                                    } `}
+                                    }`}
                                     onClick={() =>
                                       handleImageSelect(item, index)
                                     }
                                   >
-                                    {<BsCheckLg color="green" size="25" />}
+                                    <BsCheckLg color="green" size="25" />
                                   </span>
                                 </Col>
                               );
                             })}
                           </Row>
                         </>
-                      ) : message === "verified" ? (
-                        <Heading mainHeading>Complete</Heading>
-                      ) : (
+                      ) : singleData?.path ? (
                         <>
                           {message === "unverified" ? (
                             <Heading mainHeading>UnVerified</Heading>
@@ -278,7 +274,7 @@ export default function ReCaptcha() {
                             </Col>
                           </Row>
                         </>
-                      )}
+                      ) : null}
                     </Container>
                   </Container>
                 ) : null}
@@ -289,18 +285,21 @@ export default function ReCaptcha() {
                         !submitted ? (
                           <Button
                             className={styles.buttonVerify}
-                            onClick={() => setSubmitted(!submitted)}
+                            onClick={() => {
+                              getCaptcha();
+                              setSubmitted(!submitted);
+                            }}
                           >
                             Submit
                           </Button>
-                        ) : (
+                        ) : !loading.fetch ? (
                           <Button
                             className={styles.buttonVerify}
                             onClick={verifyCaptcha}
                           >
                             Verify
                           </Button>
-                        )
+                        ) : null
                       ) : null}
                     </Col>
                   </Row>

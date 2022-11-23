@@ -4,7 +4,7 @@ import routes from "./Routes/AllRoutes";
 import { PublicRoute } from "./Routes/PublicRoute";
 import { PrivateRoute } from "./Routes/PrivateRoute";
 import LoadingScreen from "./Shared/HelperMethods/LoadingScreen";
-import Layout from "./Pages/Layout";
+// import Layout from "./Pages/Layout";
 
 // function withLayout(WrappedComponent) {
 //   return class extends React.Component {
