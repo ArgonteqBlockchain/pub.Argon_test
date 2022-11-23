@@ -8,7 +8,31 @@
 .width30 {
   width: 30% !important;
 }
-
+@media screen and (max-width: 1100px) {
+  .width30 {
+    width: 40% !important;
+  }
+}
+@media screen and (max-width: 775px) {
+  .width30 {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 630px) {
+  .width30 {
+    width: 60% !important;
+  }
+}
+@media screen and (max-width: 510px) {
+  .width30 {
+    width: 70% !important;
+  }
+}
+@media screen and (max-width: 440px) {
+  .width30 {
+    width: 100% !important;
+  }
+}
 .SubContainerClass {
   width: 100%;
   margin-bottom: 2%;

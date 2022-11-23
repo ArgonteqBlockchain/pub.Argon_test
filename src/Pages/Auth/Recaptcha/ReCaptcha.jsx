@@ -28,6 +28,7 @@ export default function ReCaptcha() {
     "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/verify";
 
   useEffect(() => {
+    setMessage("");
     axios
       .get(showUrl)
       .then((response) => {
@@ -124,6 +125,7 @@ export default function ReCaptcha() {
       });
   };
   const refreshCaptcha = () => {
+    setMessage("");
     axios
       .get(showUrl)
       .then((response) => {
@@ -208,10 +210,7 @@ export default function ReCaptcha() {
                         <Col className={styles.ColClass}>
                           {message !== "verified" ? (
                             <Heading mainHeading>
-                              Select All{" "}
-                              {singleData?.categoryName
-                                ? singleData?.categoryName
-                                : data?.categoryName}
+                              Select All {categoryData.name}
                             </Heading>
                           ) : null}
                         </Col>
