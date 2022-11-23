@@ -13,23 +13,20 @@ export default function ReCaptcha() {
   const [data, setData] = useState([]);
   const [imagesData, setImagesData] = useState([]);
   const [singleData, setSingleData] = useState();
-  const [categoryData, setCategoryData] = useState({
-    name: "",
-    category: null,
-  });
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [sessionId, setSessionId] = useState("");
 
   let showUrl =
-    "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/show";
+    "https://slow-candles-clean-182-185-205-247.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://brave-lamps-own-182-176-86-191.loca.lt/api/v1/captcha/verify";
+    "https://neat-mirrors-mate-182-176-86-191.loca.lt/api/v1/captcha/verify";
 
   useEffect(() => {
     axios
       .get(showUrl)
+
       .then((response) => {
         setImagesData(response.data.data.DATA);
         setSessionId(response.data.data.sessionId);
@@ -38,50 +35,21 @@ export default function ReCaptcha() {
           let resData = response.data.data.DATA.map((item) => {
             return { ...item, ischecked: 0 };
           });
-          let shuffledArray = shuffleArray(resData);
-          setData(shuffledArray);
-          setCategoryData({
-            name: response.data.data.categoryName,
-            category: response.data.data.category,
-          });
+          setData(resData);
         } else {
           setSingleData({ ...response.data.data.DATA });
-          setCategoryData({
-            name: response.data.data.categoryName,
-            category: response.data.data.category,
-          });
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [showUrl]);
-
-  const shuffleArray = (array) => {
-    let randomIndex;
-    let currentIndex = array.length;
-
-    // While there remain elements to shuffle.
-    while (currentIndex !== 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
-
-    return array;
-  };
+  }, []);
 
   const verifyCaptcha = () => {
     let apiData = [];
     let obj2;
     if (imagesData instanceof Array) {
-      imagesData.forEach((item) => {
+      imagesData.map((item) => {
         const obj = {
           id: item.id,
           answer: item.answer,
@@ -103,21 +71,15 @@ export default function ReCaptcha() {
     axios
       .post(verifyUrl, {
         answer: apiData?.length > 0 ? apiData : obj2,
-        category: categoryData.category,
         sessionId,
       })
       .then((response) => {
-        setText("");
-        setCategoryData({ name: "", category: null });
         if (response.data.data.data === "unverified") {
           refreshCaptcha();
         }
         setMessage(response.data.data.data);
       })
       .catch((error) => {
-        setText("");
-        setCategoryData({ name: "", category: null });
-
         console.log(error);
 
         setMessage(error.data.data);
@@ -134,8 +96,7 @@ export default function ReCaptcha() {
           let resData = response.data.data.DATA.map((item) => {
             return { ...item, ischecked: 0 };
           });
-          let shuffledArray = shuffleArray(resData);
-          setData(shuffledArray);
+          setData(resData);
         } else {
           setSingleData({ ...response.data.data.DATA });
         }
@@ -158,6 +119,7 @@ export default function ReCaptcha() {
     setImagesData([...items]);
   };
 
+  console.log({ singleData });
   return (
     <div>
       <Container className="w-100">
@@ -192,7 +154,6 @@ export default function ReCaptcha() {
                     <Form.Control
                       type="text"
                       placeholder=""
-                      value={text}
                       onChange={(e) => setText(e.target.value)}
                     />
                   </Form.Group>
