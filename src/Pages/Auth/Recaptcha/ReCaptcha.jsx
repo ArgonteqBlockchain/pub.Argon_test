@@ -28,9 +28,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://crazy-baths-roll-182-185-205-247.loca.lt/api/v1/captcha/show";
+    "https://public-friends-doubt-182-185-205-247.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://crazy-baths-roll-182-185-205-247.loca.lt/api/v1/captcha/verify";
+    "https://public-friends-doubt-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ ...loading, fetch: true });
@@ -66,6 +66,7 @@ export default function ReCaptcha() {
   };
 
   const verifyCaptcha = () => {
+    setLoading({ ...loading, verify: true });
     let apiData = [];
     let obj2;
     if (imagesData instanceof Array) {
@@ -101,6 +102,7 @@ export default function ReCaptcha() {
           getCaptcha();
           toast.error("UnVerified");
         }
+        setLoading({ ...loading, verify: false });
       })
       .catch((error) => {
         console.log(error);
@@ -108,6 +110,7 @@ export default function ReCaptcha() {
         setLoading({ fetch: false, verify: false });
         setSubmitted(false);
         setVerifyError(error.message);
+        setLoading({ ...loading, verify: false });
       });
   };
 
@@ -296,8 +299,9 @@ export default function ReCaptcha() {
                           <Button
                             className={styles.buttonVerify}
                             onClick={verifyCaptcha}
+                            disabled={loading.verify}
                           >
-                            Verify
+                            {loading.verify ? "Verifying" : "Verify"}
                           </Button>
                         ) : null
                       ) : null}
