@@ -28,17 +28,16 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://public-friends-doubt-182-185-205-247.loca.lt/api/v1/captcha/show";
+    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://public-friends-doubt-182-185-205-247.loca.lt/api/v1/captcha/verify";
+    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
-    setLoading({ ...loading, fetch: true });
+    setLoading({ fetch: true, verify: false });
     resetStates();
     axios
       .get(showUrl)
       .then((res) => {
-        console.log({ res });
         setImagesData(res?.data?.data?.DATA);
         setCaptchaInfo({
           category: res?.data?.data?.category,
@@ -66,7 +65,7 @@ export default function ReCaptcha() {
   };
 
   const verifyCaptcha = () => {
-    setLoading({ ...loading, verify: true });
+    setLoading({ fetch: false, verify: true });
     let apiData = [];
     let obj2;
     if (imagesData instanceof Array) {
@@ -98,19 +97,18 @@ export default function ReCaptcha() {
       .then((res) => {
         setText("");
         setMessage(res.data.data.data);
+        setLoading({ fetch: false, verify: false });
         if (res.data.data.data === "unverified") {
           getCaptcha();
           toast.error("UnVerified");
         }
-        setLoading({ ...loading, verify: false });
       })
       .catch((error) => {
         console.log(error);
         toast.error("Network Error");
-        setLoading({ fetch: false, verify: false });
         setSubmitted(false);
         setVerifyError(error.message);
-        setLoading({ ...loading, verify: false });
+        setLoading({ fetch: false, verify: false });
       });
   };
 
@@ -171,7 +169,10 @@ export default function ReCaptcha() {
                     <Form.Control
                       type="text"
                       value={text}
-                      onChange={(e) => setText(e.target.value)}
+                      onChange={(e) => {
+                        e.preventDefault();
+                        setText(e.target.value);
+                      }}
                     />
                   </Form.Group>
                 </Form>
