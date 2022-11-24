@@ -18,8 +18,9 @@ export default function ReCaptcha() {
   const [singleData, setSingleData] = useState();
   const [imagesData, setImagesData] = useState([]);
   const [submitted, setSubmitted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [verifyError, setVerifyError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
   const [loading, setLoading] = useState({ fetch: false, verify: false });
   const [captchaInfo, setCaptchaInfo] = useState({
     sessionId: "",
@@ -168,10 +169,13 @@ export default function ReCaptcha() {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      value={text}
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setText(e.target.value);
+                      value={walletAddress}
+                      placeholder="0xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                      onChange={(e) => setWalletAddress(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
                       }}
                     />
                   </Form.Group>
@@ -203,7 +207,7 @@ export default function ReCaptcha() {
                     <Container className={styles.SubContainerClass}>
                       <Row className={styles.RowClass}>
                         <Col>
-                          {message !== "verified" ? (
+                          {message !== "verified" && loading.fetch === false ? (
                             <Heading mainHeading>
                               Select All {captchaInfo.categoryName}
                             </Heading>
@@ -276,6 +280,21 @@ export default function ReCaptcha() {
                                 </div>
                               </Form>
                             </Col>
+                            <Form className="w-100 rounded-top">
+                              <Form.Group className="mb-2 mt-3">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Enter Captcha Answer"
+                                  value={text}
+                                  onChange={(e) => setText(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Group>
+                            </Form>
                           </Row>
                         </>
                       ) : null}
