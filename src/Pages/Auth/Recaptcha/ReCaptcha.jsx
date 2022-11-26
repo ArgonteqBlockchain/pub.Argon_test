@@ -29,9 +29,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://afraid-mails-throw-182-185-205-247.loca.lt/api/v1/captcha/show";
+    "https://soft-turkeys-hug-182-185-205-247.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://afraid-mails-throw-182-185-205-247.loca.lt/api/v1/captcha/verify";
+    "https://soft-turkeys-hug-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ fetch: true, verify: false });
