@@ -29,9 +29,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/show";
+    "https://afraid-mails-throw-182-185-205-247.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/verify";
+    "https://afraid-mails-throw-182-185-205-247.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ fetch: true, verify: false });
