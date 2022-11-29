@@ -29,9 +29,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/show";
+    "https://polite-cloths-sin-182-176-86-191.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://rich-groups-appear-182-176-86-191.loca.lt/api/v1/captcha/verify";
+    "https://polite-cloths-sin-182-176-86-191.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ fetch: true, verify: false });
@@ -236,6 +236,7 @@ export default function ReCaptcha() {
                                   md="4"
                                   lg="4"
                                   xl="4"
+                                  xxl="4"
                                   key={index}
                                   className={styles.ImageColumnClass}
                                 >
