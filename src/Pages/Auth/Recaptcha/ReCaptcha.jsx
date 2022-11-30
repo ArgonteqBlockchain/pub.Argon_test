@@ -29,9 +29,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    " https://bright-drinks-visit-182-176-86-191.loca.lt/api/v1/captcha/show";
+    "https://neat-phones-push-182-185-146-215.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    " https://bright-drinks-visit-182-176-86-191.loca.lt/api/v1/captcha/verify";
+    "https://neat-phones-push-182-185-146-215.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ fetch: true, verify: false });
