@@ -29,9 +29,9 @@ export default function ReCaptcha() {
   });
 
   let showUrl =
-    "https://neat-phones-push-182-185-146-215.loca.lt/api/v1/captcha/show";
+    "https://fancy-numbers-itch-37-222-195-15.loca.lt/api/v1/captcha/show";
   let verifyUrl =
-    "https://neat-phones-push-182-185-146-215.loca.lt/api/v1/captcha/verify";
+    "https://fancy-numbers-itch-37-222-195-15.loca.lt/api/v1/captcha/verify";
 
   const getCaptcha = () => {
     setLoading({ fetch: true, verify: false });
